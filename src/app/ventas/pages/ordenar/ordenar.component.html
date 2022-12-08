@@ -1,0 +1,101 @@
+<div class="text-layout">
+  <h1>Pipes personalizados</h1>
+  <p>Pipes creados por {{ 'nosotros' | mayusculas: mayusculasBoolean }}</p>
+
+  <!-- <button
+    pButton
+    label="Toggle Mayusculas"
+    (click)="alternarMayusculas()"
+  ></button> -->
+</div>
+
+<p-toolbar class="mr-5">
+  <div class="p-toolbar-group-left"></div>
+
+  <div class="p-toolbar-group-right">
+    <button
+      pButton
+      label="Toggle Mayusculas"
+      (click)="alternarMayusculas()"
+      class="mr-1 p-button-primary"
+    ></button>
+
+    <button
+      pButton
+      label="Por nombre"
+      (click)="ordenarValores('nombre')"
+      icon="pi pi-sort"
+      class="mr-1 p-button-secondary"
+    ></button>
+
+    <button
+      pButton
+      label="Vuela"
+      (click)="ordenarValores('vuela')"
+      icon="pi pi-sort"
+      class="mr-1 p-button-success"
+    ></button>
+
+    <button
+      pButton
+      label="Por color"
+      (click)="ordenarValores('color')"
+      icon="pi pi-sort"
+      class="mr-1 p-button-warning"
+    ></button>
+  </div>
+</p-toolbar>
+
+<p-fieldset legend="Sort por Pipe" [toggleable]="true">
+  <div class="grid">
+    <div class="col mt-2">
+      <p-table [value]="heroes | ordenar: ordenarPor">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Name</th>
+            <th>Vuela</th>
+            <th>Color</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-heroe>
+          <tr>
+            <td>{{ heroe.nombre }}</td>
+            <td>{{ heroe.vuela | vuela | titlecase }}</td>
+            <td>{{ heroe.color }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</p-fieldset>
+<!-- Sizedbox -->
+<div class="my-4"></div>
+
+<p-fieldset legend="Sort por PrimeNG" [toggleable]="true">
+  <div class="grid">
+    <div class="col mt-2">
+      <p-table [value]="heroes | slice: 0">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="nombre" style="width:20%">
+              Code<p-sortIcon field="nombre"></p-sortIcon>
+            </th>
+            <th pSortableColumn="vuela" style="width:20%">
+              Vuela<p-sortIcon field="vuela"></p-sortIcon>
+            </th>
+            <th pSortableColumn="color" style="width:20%">
+              Color<p-sortIcon field="color"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-heroe>
+          <tr>
+            <td>{{ heroe.nombre }}</td>
+            <td>{{ heroe.vuela | vuela | titlecase }}</td>
+            <td>{{ heroe.color }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</p-fieldset>
